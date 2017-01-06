@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: com.roger.gradle.LocalPlugin
-//apply plugin: 'firstPlugin'
+//apply plugin: com.roger.gradle.LocalPlugin
+apply plugin: 'firstPlugin'
 
 android {
     compileSdkVersion 24
@@ -32,24 +32,24 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-//MyPlugin {
-//    javaSrcDir = 'src/main/java'
-//    classesOutDir = 'build/out_classes'
-//
-//    outputFileDir = 'release'
-//    outputFileName = 'helloLib-release.jar'
-//
-//    // Android SDK Dir
-//    androidJarDir = android.getSdkDirectory().toString() + "/platforms/" + "${android.compileSdkVersion}"
-//
-//    // JAVA HOME
-//    javaBase = System.properties["java.home"]
-//    javaRt = "/lib/rt.jar"
-//    if (System.properties["os.name"].toLowerCase().contains("mac")) {
-//        if (!new File(javaBase + javaRt).exists()) {
-//            javaRt = "/../Classes/classes.jar"
-//        }
-//    }
-//
-//    proguardConfigFile = 'proguard-rules.pro'
-//}
+MyPlugin {
+    javaSrcDir = 'src/main/java'
+    classesOutDir = 'build/out_classes'
+
+    outputFileDir = 'release'
+    outputFileName = 'helloLib-release.jar'
+
+    // Android SDK Dir
+    androidJarDir = android.getSdkDirectory().toString() + "/platforms/" + "${android.compileSdkVersion}"
+
+    // JAVA HOME
+    javaBase = System.properties["java.home"]
+    javaRt = "/lib/rt.jar"
+    if (System.properties["os.name"].toLowerCase().contains("mac")) {
+        if (!new File(javaBase + javaRt).exists()) {
+            javaRt = "/../Classes/classes.jar"
+        }
+    }
+
+    proguardConfigFile = 'proguard-rules.pro'
+}
