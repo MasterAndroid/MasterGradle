@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+//apply plugin: com.roger.gradle.MyPlugin
+apply plugin: 'firstPlugin'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.roger.mastergradleplugin"
+        minSdkVersion 19
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    testCompile 'junit:junit:4.12'
+}
+
+MyPlugin {
+    javaSrcDir = 'src/main/java'
+    classesOutDir = 'build/out_classes'
+
+    outputFileDir = 'release'
+    outputFileName = 'helloLib-release.jar'
+
+    // Android SDK Dir
+    androidJarDir = android.getSdkDirectory().toString() + "/platforms/" + "${android.compileSdkVersion}"
+
+    // JAVA HOME
+    javaBase = System.properties["java.home"]
+    javaRt = "/lib/rt.jar"
+    if (System.properties["os.name"].toLowerCase().contains("mac")) {
+        if (!new File(javaBase + javaRt).exists()) {
+            javaRt = "/../Classes/classes.jar"
+        }
+    }
+
+    proguardConfigFile = 'proguard-rules.pro'
+}
